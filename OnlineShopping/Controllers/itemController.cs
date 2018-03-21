@@ -13,5 +13,10 @@ namespace OnlineShopping.Controllers
         {
             return View();
         }
+        public ActionResult addProduct()
+        {
+            return View();
+        }
+ 
     }
 }
