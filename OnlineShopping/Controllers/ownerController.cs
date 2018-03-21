@@ -12,10 +12,6 @@ namespace OnlineShopping.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-        public ActionResult addItem()
-        {
-            return View();
-        }
+        }     
     }
 }

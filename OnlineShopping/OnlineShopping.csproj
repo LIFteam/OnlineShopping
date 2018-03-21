@@ -196,13 +196,9 @@
     <Content Include="Views\item\addProduct.cshtml" />
     <Content Include="Views\order\addOrder.cshtml" />
     <Content Include="Views\customer\addCustomer.cshtml" />
-    <Content Include="Views\owner\addItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\customer\" />
-    <Folder Include="Views\item\" />
-    <Folder Include="Views\order\" />
     <Folder Include="Views\owner\" />
   </ItemGroup>
   <ItemGroup>
