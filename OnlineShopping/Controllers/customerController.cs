@@ -17,5 +17,9 @@ namespace OnlineShopping.Controllers
         {
             return View();
         }
+        public ActionResult addCustomerConfirm()
+        {
+            return View();
+        }
     }
 }
