@@ -3,17 +3,19 @@
     ViewBag.Title = "addOrder";
 }
 
-<h2>Selected Item:</h2>
-Item Name <br />
+<h2>Selected Item</h2>
+<form action="addOrderConfirm" method="post">
+Item Name: <br />
 <input id="name" type="text" />
 <br /><br />
-Quantity <br />
+Quantity: <br />
 <input id="quantity" type="text" />
 <br /><br />
-Total price<br />
+Total price:<br />
 <input id="price" type="text" />
 <br /><br />
-Price <br />
+Price: <br />
 <input id="price" type="text" value="RM" />
 <br /><br />
 <input id="submit" type="submit" value="Submit" /> <input id="cancel" type="reset" value="Cancel" />
+</form>
