@@ -11,6 +11,6 @@ namespace OnlineShopping.Models
         public string address { get; set; }
         public string contact { get; set; }
         public string email { get; set; }
-
+      
     }
 }
