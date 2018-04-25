@@ -208,7 +208,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__orders__userID__4CA06362">
-          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="users" Type="Self.user" Multiplicity="1" />
           <End Role="orders" Type="Self.order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="users">
