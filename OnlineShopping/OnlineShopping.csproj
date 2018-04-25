@@ -150,6 +150,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\authenticationController.cs" />
     <Compile Include="Controllers\customerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\itemController.cs" />
@@ -159,71 +160,67 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\customer.cs">
-      <DependentUpon>OnlineShoppingDataSet.tt</DependentUpon>
+      <DependentUpon>OnlineShoppingDataContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OnlineShoppingDataSet.Context.cs">
+    <Compile Include="Models\OnlineShoppingDataContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineShoppingDataSet.Context.tt</DependentUpon>
+      <DependentUpon>OnlineShoppingDataContext.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OnlineShoppingDataSet.cs">
+    <Compile Include="Models\OnlineShoppingDataContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineShoppingDataSet.tt</DependentUpon>
+      <DependentUpon>OnlineShoppingDataContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OnlineShoppingDataSet.Designer.cs">
+    <Compile Include="Models\OnlineShoppingDataContext.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OnlineShoppingDataSet.edmx</DependentUpon>
+      <DependentUpon>OnlineShoppingDataContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\order.cs">
-      <DependentUpon>OnlineShoppingDataSet.tt</DependentUpon>
+      <DependentUpon>OnlineShoppingDataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\owner.cs" />
     <Compile Include="Models\item.cs" />
     <Compile Include="Models\product.cs">
-      <DependentUpon>OnlineShoppingDataSet.tt</DependentUpon>
+      <DependentUpon>OnlineShoppingDataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\shopOwner.cs">
-      <DependentUpon>OnlineShoppingDataSet.tt</DependentUpon>
+      <DependentUpon>OnlineShoppingDataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
-      <DependentUpon>OnlineShoppingDataSet.tt</DependentUpon>
+      <DependentUpon>OnlineShoppingDataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\OnlineShopping.mdf" />
-    <Content Include="App_Data\OnlineShopping_log.ldf">
-      <DependentUpon>OnlineShopping.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\OnlineShoppingDataSet.Context.tt">
+    <Content Include="Models\OnlineShoppingDataContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OnlineShoppingDataSet.edmx</DependentUpon>
-      <LastGenOutput>OnlineShoppingDataSet.Context.cs</LastGenOutput>
+      <DependentUpon>OnlineShoppingDataContext.edmx</DependentUpon>
+      <LastGenOutput>OnlineShoppingDataContext.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\OnlineShoppingDataSet.tt">
+    <Content Include="Models\OnlineShoppingDataContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OnlineShoppingDataSet.edmx</DependentUpon>
-      <LastGenOutput>OnlineShoppingDataSet.cs</LastGenOutput>
+      <DependentUpon>OnlineShoppingDataContext.edmx</DependentUpon>
+      <LastGenOutput>OnlineShoppingDataContext.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\OnlineShoppingDataSet.edmx">
+    <EntityDeploy Include="Models\OnlineShoppingDataContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OnlineShoppingDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>OnlineShoppingDataContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\OnlineShoppingDataSet.edmx.diagram">
-      <DependentUpon>OnlineShoppingDataSet.edmx</DependentUpon>
+    <Content Include="Models\OnlineShoppingDataContext.edmx.diagram">
+      <DependentUpon>OnlineShoppingDataContext.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -254,8 +251,10 @@
     <Content Include="Views\order\addOrder.cshtml" />
     <Content Include="Views\customer\addCustomer.cshtml" />
     <Content Include="Views\customer\addCustomerConfirm.cshtml" />
+    <Content Include="Views\authentication\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\owner\" />
   </ItemGroup>
   <ItemGroup>

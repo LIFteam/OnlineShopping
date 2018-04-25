@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OnlineShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="billingAddress" Type="varchar(max)" />
+          <Property Name="shippingAddress" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="orderID" />
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="orderID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="productID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="userID" Type="varchar" MaxLength="5" />
+          <Property Name="orderDate" Type="date" />
+          <Property Name="orderQuantity" Type="int" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="productID" />
+            <PropertyRef Name="shopID" />
+          </Key>
+          <Property Name="productID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="shopID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="productName" Type="varchar" MaxLength="20" />
+          <Property Name="productContent" Type="varchar(max)" />
+          <Property Name="productQuantity" Type="int" />
+          <Property Name="productPrice" Type="float" />
+        </EntityType>
+        <EntityType Name="shopOwner">
+          <Key>
+            <PropertyRef Name="shopID" />
+          </Key>
+          <Property Name="userID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="shopID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="shopName" Type="nchar" MaxLength="25" />
+          <Property Name="shopAddress" Type="varchar(max)" />
+          <Property Name="shopEmail" Type="varchar" MaxLength="30" />
+          <Property Name="shopContactNo" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="30" />
+          <Property Name="email" Type="nchar" MaxLength="30" />
+          <Property Name="contactNo" Type="nchar" MaxLength="15" />
+          <Property Name="role" Type="nchar" MaxLength="10" />
+          <Property Name="password" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__customer__userID__276EDEB3">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__userID__4CA06362">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__shopID__49C3F6B7">
+          <End Role="shopOwner" Type="Self.shopOwner" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shopOwner">
+              <PropertyRef Name="shopID" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="shopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__shopOwner__userI__3B75D760">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="shopOwner" Type="Self.shopOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="shopOwner">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineShoppingModelStoreContainer">
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shopOwner" EntityType="Self.shopOwner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__customer__userID__276EDEB3" Association="Self.FK__customer__userID__276EDEB3">
+            <End Role="users" EntitySet="users" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__userID__4CA06362" Association="Self.FK__orders__userID__4CA06362">
+            <End Role="users" EntitySet="users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__shopID__49C3F6B7" Association="Self.FK__product__shopID__49C3F6B7">
+            <End Role="shopOwner" EntitySet="shopOwner" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__shopOwner__userI__3B75D760" Association="Self.FK__shopOwner__userI__3B75D760">
+            <End Role="users" EntitySet="users" />
+            <End Role="shopOwner" EntitySet="shopOwner" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OnlineShoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="billingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="shippingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK__customer__userID__276EDEB3" FromRole="customer" ToRole="users" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="orderID" />
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="orderID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="productID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="orderDate" Type="DateTime" Precision="0" />
+          <Property Name="orderQuantity" Type="Int32" />
+          <NavigationProperty Name="user" Relationship="Self.FK__orders__userID__4CA06362" FromRole="orders" ToRole="users" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="productID" />
+            <PropertyRef Name="shopID" />
+          </Key>
+          <Property Name="productID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shopID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="productName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="productContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="productQuantity" Type="Int32" />
+          <Property Name="productPrice" Type="Double" />
+          <NavigationProperty Name="shopOwner" Relationship="Self.FK__product__shopID__49C3F6B7" FromRole="product" ToRole="shopOwner" />
+        </EntityType>
+        <EntityType Name="shopOwner">
+          <Key>
+            <PropertyRef Name="shopID" />
+          </Key>
+          <Property Name="userID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shopID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shopName" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="shopAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="shopEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="shopContactNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="products" Relationship="Self.FK__product__shopID__49C3F6B7" FromRole="shopOwner" ToRole="product" />
+          <NavigationProperty Name="user" Relationship="Self.FK__shopOwner__userI__3B75D760" FromRole="shopOwner" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="contactNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="role" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="customer" Relationship="Self.FK__customer__userID__276EDEB3" FromRole="users" ToRole="customer" />
+          <NavigationProperty Name="orders" Relationship="Self.FK__orders__userID__4CA06362" FromRole="users" ToRole="orders" />
+          <NavigationProperty Name="shopOwners" Relationship="Self.FK__shopOwner__userI__3B75D760" FromRole="users" ToRole="shopOwner" />
+        </EntityType>
+        <Association Name="FK__customer__userID__276EDEB3">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__userID__4CA06362">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__shopID__49C3F6B7">
+          <End Role="shopOwner" Type="Self.shopOwner" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shopOwner">
+              <PropertyRef Name="shopID" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="shopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__shopOwner__userI__3B75D760">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="shopOwner" Type="Self.shopOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="shopOwner">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineShoppingDataContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="customers" EntityType="Self.customer" />
+          <EntitySet Name="orders" EntityType="Self.order" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="shopOwners" EntityType="Self.shopOwner" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK__customer__userID__276EDEB3" Association="Self.FK__customer__userID__276EDEB3">
+            <End Role="users" EntitySet="users" />
+            <End Role="customer" EntitySet="customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__userID__4CA06362" Association="Self.FK__orders__userID__4CA06362">
+            <End Role="users" EntitySet="users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__shopID__49C3F6B7" Association="Self.FK__product__shopID__49C3F6B7">
+            <End Role="shopOwner" EntitySet="shopOwners" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__shopOwner__userI__3B75D760" Association="Self.FK__shopOwner__userI__3B75D760">
+            <End Role="users" EntitySet="users" />
+            <End Role="shopOwner" EntitySet="shopOwners" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OnlineShoppingModelStoreContainer" CdmEntityContainer="OnlineShoppingDataContext">
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="billingAddress" ColumnName="billingAddress" />
+                <ScalarProperty Name="shippingAddress" ColumnName="shippingAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="orderQuantity" ColumnName="orderQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="shopID" ColumnName="shopID" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productContent" ColumnName="productContent" />
+                <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
+                <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shopOwners">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.shopOwner">
+              <MappingFragment StoreEntitySet="shopOwner">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="shopID" ColumnName="shopID" />
+                <ScalarProperty Name="shopName" ColumnName="shopName" />
+                <ScalarProperty Name="shopAddress" ColumnName="shopAddress" />
+                <ScalarProperty Name="shopEmail" ColumnName="shopEmail" />
+                <ScalarProperty Name="shopContactNo" ColumnName="shopContactNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contactNo" ColumnName="contactNo" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
