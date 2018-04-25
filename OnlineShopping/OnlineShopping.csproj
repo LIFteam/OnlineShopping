@@ -158,6 +158,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\customer.cs">
+      <DependentUpon>OnlineShoppingDataSet.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OnlineShoppingDataSet.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,8 +176,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OnlineShoppingDataSet.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\order.cs">
+      <DependentUpon>OnlineShoppingDataSet.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\owner.cs" />
     <Compile Include="Models\item.cs" />
+    <Compile Include="Models\product.cs">
+      <DependentUpon>OnlineShoppingDataSet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\shopOwner.cs">
+      <DependentUpon>OnlineShoppingDataSet.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user.cs">
+      <DependentUpon>OnlineShoppingDataSet.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
