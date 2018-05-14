@@ -150,6 +150,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Auth.cs" />
     <Compile Include="Controllers\authenticationController.cs" />
     <Compile Include="Controllers\customerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -252,6 +253,8 @@
     <Content Include="Views\customer\addCustomer.cshtml" />
     <Content Include="Views\customer\addCustomerConfirm.cshtml" />
     <Content Include="Views\authentication\Login.cshtml" />
+    <Content Include="Views\item\Catalog.cshtml" />
+    <Content Include="Views\item\Cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,6 +8,7 @@ using System.Web.Security;
 
 namespace OnlineShopping.Controllers
 {
+    [AllowAnonymous]
     public class authenticationController : Controller
     {
         // GET: authentication
@@ -20,6 +21,7 @@ namespace OnlineShopping.Controllers
         {
             return View();
         }
+       
         [HttpPost]
         public ActionResult Login(user user)
         {
@@ -27,16 +29,16 @@ namespace OnlineShopping.Controllers
 
             user match = (from x in db.users
                           where (user.email.Equals(x.email) && user.password.Equals(x.password))
-                          select x).SingleOrDefault();
+                          select x).FirstOrDefault();
 
             if (match == null)
             {
-                ViewBag.errMessage = match.email;
+                ViewBag.errMessage = "Invalid Login";
                 return View();
             }
             else
             {
-                FormsAuthentication.SetAuthCookie(user.name, false);
+                FormsAuthentication.SetAuthCookie(user.email, false);
                 return RedirectToAction("index", "Home");
             }
 
