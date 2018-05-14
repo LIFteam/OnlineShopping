@@ -43,5 +43,11 @@ namespace OnlineShopping.Controllers
             }
 
         }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("index", "Home");
+        }
     }
+
 }

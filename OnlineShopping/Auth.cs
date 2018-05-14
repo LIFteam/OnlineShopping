@@ -39,7 +39,7 @@ namespace OnlineShopping
         public override string[] GetRolesForUser(string email)
         {
             OnlineShoppingDataContext db = new OnlineShoppingDataContext();
-            string s = db.users.Where(x => x.email == "ayin@gmail.com").FirstOrDefault().role;
+            string s = db.users.Where(x => x.email == email).FirstOrDefault().role;
             string[] result = { s };
             return result;
 

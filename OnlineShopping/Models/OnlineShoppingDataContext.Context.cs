@@ -30,7 +30,5 @@ namespace OnlineShopping.Models
         public virtual DbSet<product> products { get; set; }
         public virtual DbSet<shopOwner> shopOwners { get; set; }
         public virtual DbSet<user> users { get; set; }
-
-        public System.Data.Entity.DbSet<OnlineShopping.Models.item> items { get; set; }
     }
 }

@@ -22,21 +22,26 @@
                 <ul class="nav navbar-nav">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        if(User.IsInRole("Customer"))
+                        {
+                            <li>@Html.ActionLink("Catalog", "Catalog", "item")</li>
+                        }
                         if(User.IsInRole("Owner"))
                         {
                             <li>@Html.ActionLink("Add Item", "addProduct", "item")</li>
-                        }                        
+                        }
+                        if(User.IsInRole("Admin"))
+                        {
+                            
+                        }
+                        <li>@Html.ActionLink("Logout", "Logout", "authentication")</li>
+                        if(User.IsInRole("Owner"))
+                        {
+                            <li>@Html.ActionLink("Add Item", "addProduct", "item")</li>
+                        }
                     }
                     else
                     {
-
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         <li>@Html.ActionLink("Register", "addCustomer", "customer")</li>
                         <li>@Html.ActionLink("Login", "Login", "authentication")</li>                        
                     }
