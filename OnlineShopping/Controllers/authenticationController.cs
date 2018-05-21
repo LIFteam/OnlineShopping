@@ -38,6 +38,9 @@ namespace OnlineShopping.Controllers
             }
             else
             {
+                HttpCookie cookie = new HttpCookie("user");
+                cookie["userid"] = match.userID;
+                Response.Cookies.Add(cookie);
                 FormsAuthentication.SetAuthCookie(user.email, false);
                 return RedirectToAction("index", "Home");
             }

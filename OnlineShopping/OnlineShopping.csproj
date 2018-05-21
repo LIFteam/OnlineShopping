@@ -267,6 +267,8 @@
     <Content Include="Views\customer\Edit.cshtml" />
     <Content Include="Views\owner\ManageOwner.cshtml" />
     <Content Include="Views\owner\Edit.cshtml" />
+    <Content Include="Views\item\manageProduct.cshtml" />
+    <Content Include="Views\item\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

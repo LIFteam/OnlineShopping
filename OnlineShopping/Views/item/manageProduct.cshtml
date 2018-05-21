@@ -1,0 +1,49 @@
+﻿@model IEnumerable<OnlineShopping.Models.product>
+
+@{
+    ViewBag.Title = "manageProduct";
+}
+
+<h2>Product Information</h2>
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Price (RM)
+        </th>
+        <th></th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.productName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productPrice)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.productID }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=item.productID })
+        </td>
+    </tr>
+}
+
+</table>
