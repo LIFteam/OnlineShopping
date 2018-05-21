@@ -29,17 +29,15 @@
                         if(User.IsInRole("Owner"))
                         {
                             <li>@Html.ActionLink("Add Item", "addProduct", "item")</li>
+                            <li>@Html.ActionLink("Manage Item", "manageProduct", "item")</li>
                         }
-                        if(User.IsInRole("Admin"))
+                        if (User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Manage Customer", "manageCustomer", "customer")</li>
                              <li>@Html.ActionLink("Manage Owner", "ManageOwner", "owner")</li>
                         }
                         <li>@Html.ActionLink("Logout", "Logout", "authentication")</li>
-                        if(User.IsInRole("Owner"))
-                        {
-                            <li>@Html.ActionLink("Add Item", "addProduct", "item")</li>
-                        }
+                      
                     }
                     else
                     {
