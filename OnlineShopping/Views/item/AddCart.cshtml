@@ -7,7 +7,7 @@
 <h2>AddCart</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Back to Catalog", "Catalog")
 </p>
 <table class="table">
     <tr>
@@ -22,9 +22,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.productPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.shopOwner.userID)
         </th>
         <th></th>
     </tr>
@@ -42,16 +39,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.productPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.shopOwner.userID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
+        </td>       
     </tr>
 }
 
 </table>
+@Html.ActionLink("Confirm Order", "ConfirmOrder")
