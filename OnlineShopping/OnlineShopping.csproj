@@ -257,15 +257,18 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\item\addProduct.cshtml" />
     <Content Include="Views\order\addOrder.cshtml" />
-    <Content Include="Views\customer\addCustomer.cshtml" />
+    <Content Include="Views\customer\AddCustomer.cshtml" />
     <Content Include="Views\customer\addCustomerConfirm.cshtml" />
     <Content Include="Views\authentication\Login.cshtml" />
     <Content Include="Views\item\Catalog.cshtml" />
     <Content Include="Views\item\Cart.cshtml" />
+    <Content Include="Views\item\AddCart.cshtml" />
+    <Content Include="Views\customer\ManageCustomer.cshtml" />
+    <Content Include="Views\customer\Edit.cshtml" />
+    <Content Include="Views\owner\ManageOwner.cshtml" />
+    <Content Include="Views\owner\Edit.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\owner\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>

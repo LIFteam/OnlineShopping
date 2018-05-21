@@ -10,11 +10,13 @@
     <tr>
         <th>Name
         <th>Description
+        <th>Price per unit
         <th>Quantity
     </tr>
     <tr>
         <td>@Html.DisplayFor(model => model.productName)
         <td>@Html.DisplayFor(model => model.productContent)
+        <td>@Html.DisplayFor(model => model.productPrice)
         <td><input type="number" name="quantity" value="1" min="1" max="@Html.DisplayFor(model => model.productQuantity)">
 </table>
     <input type="submit" value="Payment">

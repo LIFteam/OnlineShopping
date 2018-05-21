@@ -7,6 +7,8 @@ using System.Web.Mvc;
 
 namespace OnlineShopping.Controllers
 {
+    
+
     [AllowAnonymous]
     public class itemController : Controller
     {
@@ -25,14 +27,18 @@ namespace OnlineShopping.Controllers
         {            
             var products = db.products.ToList();
             return View(products);
-        }
+        }        
         public ActionResult AddCart(string id)
         {
             var product = (from x in db.products
                            where x.productID == id
                            select x).SingleOrDefault();
-            return View("Cart",product);
+            return View(product);
         }
- 
+        public ActionResult Payment()
+        {
+            return View();
+        }
+        
     }
 }

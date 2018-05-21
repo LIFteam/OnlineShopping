@@ -8,22 +8,24 @@ using System.Web.Mvc;
 
 namespace OnlineShopping.Controllers
 {
+    
     public class customerController : Controller
     {
+        OnlineShoppingDataContext db = new OnlineShoppingDataContext();
         // GET: customer
         public ActionResult Index()
         {
             return View();
         }
         [AllowAnonymous][HttpGet]
-        public ActionResult addCustomer()
+        public ActionResult AddCustomer()
         {
             return View();
         }
         [AllowAnonymous][HttpPost]
-        public ActionResult addCustomer(CustomerViewModels cust)
+        public ActionResult AddCustomer(user cust)
         {
-            OnlineShoppingDataContext db = new OnlineShoppingDataContext();
+          
             int count = db.users.Count();
             count++;
             string id = "U";
@@ -35,18 +37,18 @@ namespace OnlineShopping.Controllers
             user user = new user
             {
                 userID = id,
-                name = cust.u.name,
-                contactNo = cust.u.contactNo,
-                email = cust.u.email,
+                name = cust.name,
+                contactNo = cust.contactNo,
+                email = cust.email,
                 role = "Customer",
-                password = cust.u.password
+                password = cust.password
             };
 
             customer customer = new customer
             {
                 userID = id,
-                billingAddress = cust.c.billingAddress,
-                shippingAddress = cust.c.shippingAddress
+                billingAddress = cust.customer.billingAddress,
+                shippingAddress = cust.customer.shippingAddress
             };
 
             
@@ -57,9 +59,38 @@ namespace OnlineShopping.Controllers
             return View();
 
         }
-        public ActionResult addCustomerConfirm()
+        public ActionResult ManageCustomer()
+        {            
+            var user = (from x in db.users
+                        where x.role.Equals("customer")
+                        select x);
+            
+            return View(user);
+        }
+        [HttpGet]
+        public ActionResult Edit(string id)
         {
-            return View();
+            var user = (from x in db.users
+                        where x.userID.Equals(id)
+                        select x).SingleOrDefault();
+
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult Edit(user userUpdate)
+        {
+            var user = (from x in db.users
+                        where x.userID.Equals(userUpdate.userID)
+                        select x).SingleOrDefault();
+
+            user.name = userUpdate.name;
+            user.contactNo = userUpdate.contactNo;
+            user.password = userUpdate.password;
+            user.customer.billingAddress = userUpdate.customer.billingAddress;
+            user.customer.shippingAddress = userUpdate.customer.shippingAddress;
+
+            db.SaveChanges();
+            return View(user);
         }
     }
 }
