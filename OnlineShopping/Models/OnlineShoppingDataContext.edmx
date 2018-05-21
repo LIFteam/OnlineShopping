@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OnlineShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OnlineShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="customer">
           <Key>
             <PropertyRef Name="userID" />
@@ -42,7 +42,7 @@
           </Key>
           <Property Name="userID" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="shopID" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="shopName" Type="nchar" MaxLength="25" />
+          <Property Name="shopName" Type="varchar" MaxLength="25" />
           <Property Name="shopAddress" Type="varchar(max)" />
           <Property Name="shopEmail" Type="varchar" MaxLength="30" />
           <Property Name="shopContactNo" Type="varchar" MaxLength="15" />
@@ -52,11 +52,11 @@
             <PropertyRef Name="userID" />
           </Key>
           <Property Name="userID" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="name" Type="nchar" MaxLength="30" />
-          <Property Name="email" Type="nchar" MaxLength="30" />
-          <Property Name="contactNo" Type="nchar" MaxLength="15" />
-          <Property Name="role" Type="nchar" MaxLength="10" />
-          <Property Name="password" Type="nchar" MaxLength="10" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+          <Property Name="email" Type="varchar" MaxLength="30" />
+          <Property Name="contactNo" Type="varchar" MaxLength="15" />
+          <Property Name="role" Type="varchar" MaxLength="10" />
+          <Property Name="password" Type="varchar" MaxLength="10" />
         </EntityType>
         <Association Name="FK__customer__userID__276EDEB3">
           <End Role="users" Type="Self.users" Multiplicity="1" />
@@ -129,8 +129,7 @@
             <End Role="shopOwner" EntitySet="shopOwner" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OnlineShoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -174,7 +173,7 @@
           </Key>
           <Property Name="userID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="shopID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shopName" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="shopName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="shopAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="shopEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="shopContactNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
@@ -186,11 +185,11 @@
             <PropertyRef Name="userID" />
           </Key>
           <Property Name="userID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="contactNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="role" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="contactNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="customer" Relationship="Self.FK__customer__userID__276EDEB3" FromRole="users" ToRole="customer" />
           <NavigationProperty Name="orders" Relationship="Self.FK__orders__userID__4CA06362" FromRole="users" ToRole="orders" />
           <NavigationProperty Name="shopOwners" Relationship="Self.FK__shopOwner__userI__3B75D760" FromRole="users" ToRole="shopOwner" />

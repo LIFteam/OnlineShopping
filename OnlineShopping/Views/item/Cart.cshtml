@@ -1,0 +1,21 @@
+﻿@model OnlineShopping.Models.product
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Cart</h2>
+<form>
+<table class="table">
+    <tr>
+        <th>Name
+        <th>Description
+        <th>Quantity
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(model => model.productName)
+        <td>@Html.DisplayFor(model => model.productContent)
+        <td><input type="number" name="quantity" value="1" min="1" max="@Html.DisplayFor(model => model.productQuantity)">
+</table>
+    <input type="submit" value="Payment">
+</form>
