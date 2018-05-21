@@ -32,7 +32,8 @@
                         }
                         if(User.IsInRole("Admin"))
                         {
-                            
+                            <li>@Html.ActionLink("Manage Customer", "manageCustomer", "customer")</li>
+                             <li>@Html.ActionLink("Manage Owner", "ManageOwner", "owner")</li>
                         }
                         <li>@Html.ActionLink("Logout", "Logout", "authentication")</li>
                         if(User.IsInRole("Owner"))
