@@ -12,10 +12,7 @@ namespace OnlineShopping.Controllers
 
     [AllowAnonymous]
     public class itemController : Controller
-    {
-        
-        static List<product> productList = new List<product>();
-               
+    { 
         OnlineShoppingDataContext db = new OnlineShoppingDataContext();
         // GET: item
         public ActionResult Index()
@@ -91,10 +88,121 @@ namespace OnlineShopping.Controllers
         [HttpGet]
         public ActionResult AddCart(string id)
         {
+            string userid = null;
+            if (Request.Cookies["user"] != null)
+            {
+                userid = Request.Cookies["user"]["userid"];
+            }
+
             var product = (from x in db.products
                            where x.productID == id
                            select x).SingleOrDefault();
-            return View(product);
+            product.productQuantity = 1;
+            
+            if (Session["cart"] == null)
+            {
+                List<product> productList = new List<product>();
+                productList.Add(product);
+                Session["cart"] = productList;
+            }
+            else
+            {
+                List<product> productList = (List<product>)Session["cart"];
+                bool exist = false;
+                foreach(var item in productList)
+                {
+                    if (item.productID.Equals(product.productID))
+                    {
+                        exist = true;
+                        item.productQuantity++;
+                        item.productPrice*=2;
+                    }                    
+                }
+                if(exist == false)
+                {
+                    productList.Add(product);
+                }
+
+                Session["cart"] = productList;
+            }
+            return View();
+        }
+        [HttpGet]
+        public ActionResult ConfirmOrder()
+        {
+            string userid = null;
+            if (Request.Cookies["user"] != null)
+            {
+                userid = Request.Cookies["user"]["userid"];
+            }
+
+            var user = (from x in db.users
+                        where x.userID.Equals(userid)
+                        select x).SingleOrDefault();
+
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult ConfirmOrder(user user)
+        {
+            string userid = null;
+            if (Request.Cookies["user"] != null)
+            {
+                userid = Request.Cookies["user"]["userid"];
+            }
+            var orderList = (from x in db.orders
+                            select x);
+            string id = null;
+
+            int row = 0;
+            foreach(var item in orderList)
+            {
+                if (item.orderID != null)
+                {
+                    id = item.orderID;                    
+                    id = id.Substring(1);
+                    row = int.Parse(id);
+                }
+            }
+            
+            row++;
+            string id3 = "O";
+
+            if (row < 10) id3 += "00" + row.ToString();
+            else if (row < 100) id3 += "0" + row.ToString();
+            else if (row < 1000) id3 += row.ToString();
+
+            List<product> productList = (List<product>)Session["cart"];
+            
+
+            foreach(var item in productList)
+            {
+                order temp = new order();
+                temp.orderID = id3;
+                temp.productID = item.productID;
+                temp.userID = userid;
+                temp.orderDate = DateTime.Today;
+                temp.orderQuantity = item.productQuantity;
+                temp.shippingAddress = user.customer.shippingAddress;
+
+                db.orders.Add(temp);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("History");
+        }
+        public ActionResult History()
+        {
+            string userid = null;
+            if (Request.Cookies["user"] != null)
+            {
+                userid = Request.Cookies["user"]["userid"];
+            }
+
+            var order = (from x in db.orders
+                         where x.userID.Equals(userid)
+                         select x);
+            return View(order);            
         }
         public ActionResult Payment()
         {

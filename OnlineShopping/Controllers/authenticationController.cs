@@ -48,6 +48,7 @@ namespace OnlineShopping.Controllers
         }
         public ActionResult Logout()
         {
+            Session.Remove("cart");
             FormsAuthentication.SignOut();
             return RedirectToAction("index", "Home");
         }

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<OnlineShopping.Models.order>
+
+@{
+    ViewBag.Title = "History";
+    string temp = "O000";
+}
+
+<h2>Order History</h2>
+<br /><br />
+<table class="table">
+    <tr>
+        <th>
+            Order ID
+        </th>
+        <th>
+            Date
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (!temp.Equals(item.orderID))
+        {
+            temp = item.orderID;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.orderID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.orderDate)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+        else
+        {
+            continue;
+        }
+    }
+
+</table>

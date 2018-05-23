@@ -25,6 +25,7 @@
                         if(User.IsInRole("Customer"))
                         {
                             <li>@Html.ActionLink("Catalog", "Catalog", "item")</li>
+                            <li>@Html.ActionLink("History", "History", "item")</li>
                         }
                         if(User.IsInRole("Owner"))
                         {

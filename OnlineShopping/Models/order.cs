@@ -19,6 +19,7 @@ namespace OnlineShopping.Models
         public string userID { get; set; }
         public Nullable<System.DateTime> orderDate { get; set; }
         public Nullable<int> orderQuantity { get; set; }
+        public string shippingAddress { get; set; }
     
         public virtual user user { get; set; }
     }

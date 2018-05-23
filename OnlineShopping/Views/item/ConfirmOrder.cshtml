@@ -1,7 +1,9 @@
-﻿@model OnlineShopping.ViewModels.CustomerItemViewModel
+﻿@model OnlineShopping.Models.user
 
 @{
     ViewBag.Title = "ConfirmOrder";
+    List<OnlineShopping.Models.product> productList = (List<OnlineShopping.Models.product>)Session["cart"];
+    double? total = 0;
 }
 
 <h2>ConfirmOrder</h2>
@@ -17,34 +19,34 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
-        @Html.LabelFor(model => model.user.name, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.user.name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.user.name, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" ,@readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.user.customer.shippingAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.customer.shippingAddress, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.user.customer.shippingAddress, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.user.customer.shippingAddress, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.customer.shippingAddress, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.customer.shippingAddress, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.user.email, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.user.email, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.user.email, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.user.contactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.contactNo, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.user.contactNo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.user.contactNo, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.contactNo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.contactNo, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -60,12 +62,12 @@
                 Quantity
             </th>
             <th>
-                Price
+                Price (RM)
             </th>
             <th></th>
         </tr>
 
-        @foreach (var item in Model.productList)
+        @foreach (var item in productList)
         {
             <tr>
                 <td>
@@ -80,14 +82,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.productPrice)
                 </td>
-            </tr>
+            </tr>           
+                total += item.productPrice;            
         }
+        <tr>
+            <td colspan="3" align="right"><b>Total Price:</b>
+            <td>@total
+        </tr>
 
     </table>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Make Payment" class="btn btn-default" />
         </div>
     </div>
 </div>

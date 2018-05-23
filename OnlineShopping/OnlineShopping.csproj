@@ -272,6 +272,7 @@
     <Content Include="Views\item\ConfirmOrder.cshtml" />
     <Content Include="Views\item\manageProduct.cshtml" />
     <Content Include="Views\item\Edit.cshtml" />
+    <Content Include="Views\item\History.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
