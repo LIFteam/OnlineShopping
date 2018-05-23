@@ -273,6 +273,7 @@
     <Content Include="Views\item\manageProduct.cshtml" />
     <Content Include="Views\item\Edit.cshtml" />
     <Content Include="Views\item\History.cshtml" />
+    <Content Include="Views\item\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
