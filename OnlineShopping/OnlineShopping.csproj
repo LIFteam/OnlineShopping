@@ -274,6 +274,7 @@
     <Content Include="Views\item\Edit.cshtml" />
     <Content Include="Views\item\History.cshtml" />
     <Content Include="Views\item\Delete.cshtml" />
+    <Content Include="Views\item\Order.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
