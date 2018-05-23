@@ -94,58 +94,8 @@ namespace OnlineShopping.Controllers
             var product = (from x in db.products
                            where x.productID == id
                            select x).SingleOrDefault();
-            
-            bool exist = false;
-            foreach(var item in productList)
-            {
-                if (item.productID.Equals(id))
-                {
-                    exist = true;
-                    item.productQuantity++;
-                }
-            }
-            if(exist == false)
-            {
-                product.productQuantity = 1;
-                productList.Add(product);
-            }
-
-            return View(productList);
+            return View(product);
         }
-        [HttpPost]
-        public ActionResult AddCart()
-        {
-
-            return View();
-        }
-
-        public ActionResult ConfirmOrder()
-        {
-
-
-            CustomerItemViewModel vm = new CustomerItemViewModel()
-            {
-                user =
-            };
-            return View(productList);
-        }
-
-        [HttpPost]
-        public ActionResult Edit(product productUpdate)
-        {
-            var product = (from x in db.products
-                        where x.productID.Equals(productUpdate.productID)
-                        select x).SingleOrDefault();
-
-            product.productName = productUpdate.productName;
-            product.productContent = productUpdate.productContent;
-            product.productQuantity = productUpdate.productQuantity;
-            product.productPrice = productUpdate.productPrice;
-            
-            db.SaveChanges();
-            return RedirectToAction("manageProduct");
-        }
-
         public ActionResult Payment()
         {
             return View();
