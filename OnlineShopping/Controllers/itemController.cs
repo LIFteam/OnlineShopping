@@ -151,20 +151,20 @@ namespace OnlineShopping.Controllers
                 userid = Request.Cookies["user"]["userid"];
             }
             var orderList = (from x in db.orders
-                            select x);
+                             select x);
             string id = null;
 
             int row = 0;
-            foreach(var item in orderList)
+            foreach (var item in orderList)
             {
                 if (item.orderID != null)
                 {
-                    id = item.orderID;                    
+                    id = item.orderID;
                     id = id.Substring(1);
                     row = int.Parse(id);
                 }
             }
-            
+
             row++;
             string id3 = "O";
 
@@ -173,7 +173,40 @@ namespace OnlineShopping.Controllers
             else if (row < 1000) id3 += row.ToString();
 
             List<product> productList = (List<product>)Session["cart"];
-            
+
+
+            foreach (var item in productList)
+            {
+                order temp = new order();
+                temp.orderID = id3;
+                temp.productID = item.productID;
+                temp.userID = userid;
+                temp.orderDate = DateTime.Today;
+                temp.orderQuantity = item.productQuantity;
+                temp.shippingAddress = user.customer.shippingAddress;
+
+                db.orders.Add(temp);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("History");
+        }
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            var product = (from x in db.products
+                        where x.productID.Equals(id)
+                        select x).SingleOrDefault();
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(product productUpdate)
+        {
+            var product = (from x in db.products
+                        where x.productID.Equals(productUpdate.productID)
+                        select x).SingleOrDefault();
 
             product.productName = productUpdate.productName;
             product.productContent = productUpdate.productContent;
@@ -182,6 +215,42 @@ namespace OnlineShopping.Controllers
             
             db.SaveChanges();
             return RedirectToAction("manageProduct");
+        }
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            var product = (from x in db.products
+                           where x.productID.Equals(id)
+                           select x).SingleOrDefault();
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(product productDelete)
+        {
+
+            var product = (from x in db.products
+                           where x.productID.Equals(productDelete.productID)
+                           select x).SingleOrDefault();
+
+            db.products.Remove(product);
+            
+            db.SaveChanges();
+            return RedirectToAction("manageProduct");
+        }
+        public ActionResult History()
+        {
+            string userid = null;
+            if (Request.Cookies["user"] != null)
+            {
+                userid = Request.Cookies["user"]["userid"];
+            }
+
+            var order = (from x in db.orders
+                         where x.userID.Equals(userid)
+                         select x);
+            return View(order);
         }
 
         public ActionResult Payment()
