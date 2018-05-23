@@ -59,7 +59,7 @@ namespace OnlineShopping.Controllers
             db.products.Add(product);
             db.SaveChanges();
 
-            return View();
+            return RedirectToAction("manageProduct");
         }
         
         public ActionResult manageProduct()
@@ -118,6 +118,30 @@ namespace OnlineShopping.Controllers
             db.SaveChanges();
             return RedirectToAction("manageProduct");
         }
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            var product = (from x in db.products
+                           where x.productID.Equals(id)
+                           select x).SingleOrDefault();
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(product productDelete)
+        {
+
+            var product = (from x in db.products
+                           where x.productID.Equals(productDelete.productID)
+                           select x).SingleOrDefault();
+
+            db.products.Remove(product);
+            
+            db.SaveChanges();
+            return RedirectToAction("manageProduct");
+        }
+
 
         public ActionResult Payment()
         {
