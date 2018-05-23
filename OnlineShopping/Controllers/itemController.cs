@@ -59,7 +59,7 @@ namespace OnlineShopping.Controllers
             db.products.Add(product);
             db.SaveChanges();
 
-            return View();
+            return RedirectToAction("manageProduct");
         }
         
         public ActionResult manageProduct()
@@ -175,35 +175,15 @@ namespace OnlineShopping.Controllers
             List<product> productList = (List<product>)Session["cart"];
             
 
-            foreach(var item in productList)
-            {
-                order temp = new order();
-                temp.orderID = id3;
-                temp.productID = item.productID;
-                temp.userID = userid;
-                temp.orderDate = DateTime.Today;
-                temp.orderQuantity = item.productQuantity;
-                temp.shippingAddress = user.customer.shippingAddress;
-
-                db.orders.Add(temp);
-                db.SaveChanges();
-            }
-
-            return RedirectToAction("History");
+            product.productName = productUpdate.productName;
+            product.productContent = productUpdate.productContent;
+            product.productQuantity = productUpdate.productQuantity;
+            product.productPrice = productUpdate.productPrice;
+            
+            db.SaveChanges();
+            return RedirectToAction("manageProduct");
         }
-        public ActionResult History()
-        {
-            string userid = null;
-            if (Request.Cookies["user"] != null)
-            {
-                userid = Request.Cookies["user"]["userid"];
-            }
 
-            var order = (from x in db.orders
-                         where x.userID.Equals(userid)
-                         select x);
-            return View(order);            
-        }
         public ActionResult Payment()
         {
             return View();
