@@ -253,6 +253,25 @@ namespace OnlineShopping.Controllers
             return View(order);
         }
 
+        public ActionResult Order()
+        {
+            string userid = null;
+            if (Request.Cookies["user"] != null)
+            {
+                userid = Request.Cookies["user"]["userid"];
+            }
+
+            string shopid = (from x in db.shopOwners
+                             where x.userID.Equals(userid)
+                             select x.shopID).SingleOrDefault();
+
+            var orderList = (from x in db.orders join y in db.products on x.productID equals y.productID
+                             where y.shopID.Equals(shopid)
+                             select  x);                             
+
+            return View(orderList);
+        }
+
         public ActionResult Details(string orderID)
         {
             var order = (from x in db.orders

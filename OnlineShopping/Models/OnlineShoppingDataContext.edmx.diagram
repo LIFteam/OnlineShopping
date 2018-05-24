@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0a51b8737b764f0a8a9fcbc127a79bc5" Name="Diagram1">
+      <Diagram DiagramId="719fb947b1a5491db61aba8dd80c2f5e" Name="Diagram1">
         <EntityTypeShape EntityType="OnlineShoppingModel.customer" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineShoppingModel.order" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineShoppingModel.product" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineShoppingModel.shopOwner" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineShoppingModel.user" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.product" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.shopOwner" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.user" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <AssociationConnector Association="OnlineShoppingModel.FK__customer__userID__276EDEB3" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineShoppingModel.FK__orders__userID__4CA06362" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineShoppingModel.FK__product__shopID__49C3F6B7" ManuallyRouted="false" />
