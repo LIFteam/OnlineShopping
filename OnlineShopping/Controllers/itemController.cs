@@ -253,10 +253,29 @@ namespace OnlineShopping.Controllers
             return View(order);
         }
 
+        public ActionResult Details(string orderID)
+        {
+            var order = (from x in db.orders
+                         where x.orderID.Equals(orderID)
+                         select x);
+            return View(order);
+        }
+
         public ActionResult Payment()
         {
             return View();
         }
-        
+     
+        [HttpGet]
+        public ActionResult DeleteCart()
+        {
+            return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteCart()
+        {
+            return View();
+        }
     }
 }

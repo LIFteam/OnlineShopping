@@ -4,18 +4,16 @@
     ViewBag.Title = "manageCustomer";
 }
 
-<h2>manageCustomer</h2>
+<h2>Manage Customer</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<br />
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.name)
+            <div class="control-label col-md-2"><b> Name </b></div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.email)
+            <div class="control-label col-md-2"><b> Email </b></div>
         </th>        
         <th></th>
     </tr>
@@ -30,7 +28,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.userID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.userID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.userID })
         </td>
     </tr>

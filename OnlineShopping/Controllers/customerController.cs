@@ -92,5 +92,6 @@ namespace OnlineShopping.Controllers
             db.SaveChanges();
             return View(user);
         }
+
     }
 }

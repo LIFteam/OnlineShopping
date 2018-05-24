@@ -31,20 +31,23 @@
 
     @foreach (var item in productList)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.productName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.productContent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.productQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.productPrice)
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.productName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productPrice)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "DeleteCart", new { id = item.productID })
+        </td>
+    </tr>
     }
 
 </table>
