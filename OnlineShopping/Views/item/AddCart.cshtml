@@ -6,50 +6,57 @@
     List<OnlineShopping.Models.product> productList = (List<OnlineShopping.Models.product>)Session["cart"];
 }
 
-<h2>AddCart</h2>
+<h2>Item Cart: Order Confirmation</h2>
 <br />
 <p>
     @Html.ActionLink("Back to Catalog", "Catalog")
 </p>
 <br />
-<table class="table">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Description
-        </th>
-        <th>
-            Quantity
-        </th>
-        <th>
-            Price (RM)
-        </th>
-        <th></th>
-    </tr>
+@if (productList == null)
+{
+    <text>Cart is currently empty</text>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Price (RM)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in productList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productContent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productPrice)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteCart", new { id = item.productID })
+                </td>
+            </tr>
+        }
 
-    @foreach (var item in productList)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.productName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.productContent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.productQuantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.productPrice)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "DeleteCart", new { id = item.productID })
-        </td>
-    </tr>
-    }
+    </table>
 
-</table>
+    @Html.ActionLink("Confirm Order", "ConfirmOrder", "order")
+}
 
-@Html.ActionLink("Confirm Order", "ConfirmOrder")

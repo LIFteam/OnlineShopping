@@ -1,0 +1,40 @@
+﻿@model List<OnlineShopping.ViewModels.OrderProductViewModels>
+
+@{
+    ViewBag.Title = "DetailsOwner";
+}
+
+<h2>DetailsOwner</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Product
+        </th>
+        <th>
+            Order Quantity
+        </th>
+        <th>
+            Price (RM)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.product.productID): @Html.DisplayFor(modelItem => item.product.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.order.orderQuantity)
+            </td>
+            <td>
+                @{
+                    item.product.productPrice *= item.order.orderQuantity;
+                }
+                @Html.DisplayFor(modelItem => item.product.productPrice)
+            </td>
+        </tr>
+    }
+
+</table>

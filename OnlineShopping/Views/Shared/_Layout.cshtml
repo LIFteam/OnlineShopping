@@ -22,31 +22,56 @@
                 <ul class="nav navbar-nav">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        if(User.IsInRole("Customer"))
+                        if (User.IsInRole("Customer"))
                         {
                             <li>@Html.ActionLink("Catalog", "Catalog", "item")</li>
-                            <li>@Html.ActionLink("History", "History", "item")</li>
+                            <li>@Html.ActionLink("History", "History", "order")</li>
                         }
-                        if(User.IsInRole("Owner"))
+                        if (User.IsInRole("Owner"))
                         {
                             <li>@Html.ActionLink("Add Item", "addProduct", "item")</li>
                             <li>@Html.ActionLink("Manage Item", "manageProduct", "item")</li>
-                            <li>@Html.ActionLink("Order", "Order", "item")</li>
+                            <li>@Html.ActionLink("Order", "Order", "order")</li>
                         }
                         if (User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Manage Customer", "manageCustomer", "customer")</li>
-                             <li>@Html.ActionLink("Manage Owner", "ManageOwner", "owner")</li>
+                            <li>@Html.ActionLink("Manage Owner", "ManageOwner", "owner")</li>
                         }
-                        <li>@Html.ActionLink("Logout", "Logout", "authentication")</li>
-                      
+
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Register", "addCustomer", "customer")</li>
-                        <li>@Html.ActionLink("Login", "Login", "authentication")</li>                        
                     }
-                    
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Customer"))
+                        {
+                            <li>@Html.ActionLink("Item Cart", "Cart", "item")</li>
+                        }
+                        if (User.IsInRole("Owner"))
+                        {
+                        }
+                        if (User.IsInRole("Admin"))
+                        {
+                        }
+                        <li>@Html.ActionLink("Logout", "Logout", "authentication")</li>
+
+                    }
+                    else
+                    {
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Registration <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Customer", "addCustomer", "customer")</li>
+                                <li>@Html.ActionLink("Shop Owner", "addOwner", "owner")</li>                                
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Login", "Login", "authentication")</li>
+                    }
+
                 </ul>
             </div>
         </div>
@@ -60,6 +85,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

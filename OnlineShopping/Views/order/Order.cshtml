@@ -1,0 +1,60 @@
+﻿@model IEnumerable<OnlineShopping.Models.order>
+
+@{
+    ViewBag.Title = "Order";
+    string temp = "O000";
+}
+
+<h2>Order</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Order ID
+        </th>
+        <th>
+            Order Date
+        </th>
+        <th>
+            Shipping Address
+        </th>
+        <th>
+            Ordered By
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    if (!temp.Equals(item.orderID))
+    {
+        temp = item.orderID;
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.orderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.orderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.shippingAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.name)<br>
+            @Html.DisplayFor(modelItem => item.user.email)<br>
+            @Html.DisplayFor(modelItem => item.user.contactNo)
+        </td>
+        <td>
+
+            @Html.ActionLink("Details", "DetailsOwner", new { id = item.orderID })
+
+        </td>
+    </tr>
+    }
+    else
+    {
+        continue;
+    }
+}
+
+</table>

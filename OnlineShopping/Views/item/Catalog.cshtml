@@ -40,9 +40,7 @@
                     @Html.DisplayFor(modelItem => item.productQuantity)
                 </td>
                 <td>
-                    <td>
                     @Html.ActionLink("Add to cart", "AddCart", new { id = item.productID })
-                </td>
                 </td>
             </tr>
         }

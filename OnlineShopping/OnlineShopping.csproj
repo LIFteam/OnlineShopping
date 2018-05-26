@@ -195,6 +195,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CustomerItemViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModels.cs" />
+    <Compile Include="ViewModels\OrderProductViewModels.cs" />
+    <Compile Include="ViewModels\UserOwnerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\OnlineShopping.mdf" />
@@ -203,6 +205,9 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\Ayam.jpg" />
+    <Content Include="Content\Image\Ikan.jpg" />
+    <Content Include="Content\Image\Milo.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -268,13 +273,16 @@
     <Content Include="Views\customer\Edit.cshtml" />
     <Content Include="Views\owner\ManageOwner.cshtml" />
     <Content Include="Views\owner\Edit.cshtml" />
-    <Content Include="Views\item\Payment.cshtml" />
-    <Content Include="Views\item\ConfirmOrder.cshtml" />
+    <Content Include="Views\order\Payment.cshtml" />
+    <Content Include="Views\order\ConfirmOrder.cshtml" />
     <Content Include="Views\item\manageProduct.cshtml" />
     <Content Include="Views\item\Edit.cshtml" />
-    <Content Include="Views\item\History.cshtml" />
+    <Content Include="Views\order\History.cshtml" />
     <Content Include="Views\item\Delete.cshtml" />
-    <Content Include="Views\item\Order.cshtml" />
+    <Content Include="Views\order\Order.cshtml" />
+    <Content Include="Views\order\DetailsCustomer.cshtml" />
+    <Content Include="Views\order\DetailsOwner.cshtml" />
+    <Content Include="Views\owner\addOwner.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

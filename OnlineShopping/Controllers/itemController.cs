@@ -38,13 +38,49 @@ namespace OnlineShopping.Controllers
             count++;
             string id = "P";
 
-            if (count < 10) id += "00" + count.ToString();
-            else if (count < 100) id += "0" + count.ToString();
-            else if (count < 1000) id += count.ToString();
-
             string shopid = (from x in db.shopOwners
                              where x.userID.Equals(userid)
                              select x.shopID).SingleOrDefault();
+            int i = 1;
+            int gap = 0;
+            if (count == 0)
+            {
+                id = "P001";
+            }
+            else
+            {
+                var pro = (from x in db.products
+                           orderby x.productID
+                           select x);
+                
+                foreach (var item in pro)
+                {
+                    string temp = null;
+                    temp = item.productID;
+                    temp = temp.Substring(1);
+                    int temp2 = int.Parse(temp);
+                    
+                    if(temp2 != i)
+                    {
+                        gap = i;
+                        break;
+                    }
+                    i++;
+                }
+            }
+            if(gap != 0)
+            {
+                if (gap < 10) id += "00" + gap.ToString();
+                else if (gap < 100) id += "0" + gap.ToString();
+                else if (gap < 1000) id += gap.ToString();
+            }
+            else
+            {
+                if (count < 10) id += "00" + count.ToString();
+                else if (count < 100) id += "0" + count.ToString();
+                else if (count < 1000) id += count.ToString();
+            }
+
 
             product product = new product
             {
@@ -84,7 +120,11 @@ namespace OnlineShopping.Controllers
         {            
             var products = db.products.ToList();
             return View(products);
-        }        
+        }
+        public ActionResult Cart()
+        {            
+            return View("AddCart");
+        }
         [HttpGet]
         public ActionResult AddCart(string id)
         {
@@ -127,70 +167,7 @@ namespace OnlineShopping.Controllers
             }
             return View();
         }
-        [HttpGet]
-        public ActionResult ConfirmOrder()
-        {
-            string userid = null;
-            if (Request.Cookies["user"] != null)
-            {
-                userid = Request.Cookies["user"]["userid"];
-            }
-
-            var user = (from x in db.users
-                        where x.userID.Equals(userid)
-                        select x).SingleOrDefault();
-
-            return View(user);
-        }
-        [HttpPost]
-        public ActionResult ConfirmOrder(user user)
-        {
-            string userid = null;
-            if (Request.Cookies["user"] != null)
-            {
-                userid = Request.Cookies["user"]["userid"];
-            }
-            var orderList = (from x in db.orders
-                             select x);
-            string id = null;
-
-            int row = 0;
-            foreach (var item in orderList)
-            {
-                if (item.orderID != null)
-                {
-                    id = item.orderID;
-                    id = id.Substring(1);
-                    row = int.Parse(id);
-                }
-            }
-
-            row++;
-            string id3 = "O";
-
-            if (row < 10) id3 += "00" + row.ToString();
-            else if (row < 100) id3 += "0" + row.ToString();
-            else if (row < 1000) id3 += row.ToString();
-
-            List<product> productList = (List<product>)Session["cart"];
-
-
-            foreach (var item in productList)
-            {
-                order temp = new order();
-                temp.orderID = id3;
-                temp.productID = item.productID;
-                temp.userID = userid;
-                temp.orderDate = DateTime.Today;
-                temp.orderQuantity = item.productQuantity;
-                temp.shippingAddress = user.customer.shippingAddress;
-
-                db.orders.Add(temp);
-                db.SaveChanges();
-            }
-
-            return RedirectToAction("History");
-        }
+        
         [HttpGet]
         public ActionResult Edit(string id)
         {
@@ -235,66 +212,27 @@ namespace OnlineShopping.Controllers
                            select x).SingleOrDefault();
 
             db.products.Remove(product);
-            
             db.SaveChanges();
+            
             return RedirectToAction("manageProduct");
         }
-        public ActionResult History()
-        {
-            string userid = null;
-            if (Request.Cookies["user"] != null)
-            {
-                userid = Request.Cookies["user"]["userid"];
-            }
-
-            var order = (from x in db.orders
-                         where x.userID.Equals(userid)
-                         select x);
-            return View(order);
-        }
-
-        public ActionResult Order()
-        {
-            string userid = null;
-            if (Request.Cookies["user"] != null)
-            {
-                userid = Request.Cookies["user"]["userid"];
-            }
-
-            string shopid = (from x in db.shopOwners
-                             where x.userID.Equals(userid)
-                             select x.shopID).SingleOrDefault();
-
-            var orderList = (from x in db.orders join y in db.products on x.productID equals y.productID
-                             where y.shopID.Equals(shopid)
-                             select  x);                             
-
-            return View(orderList);
-        }
-
-        public ActionResult Details(string orderID)
-        {
-            var order = (from x in db.orders
-                         where x.orderID.Equals(orderID)
-                         select x);
-            return View(order);
-        }
-
-        public ActionResult Payment()
-        {
-            return View();
-        }
-     
         [HttpGet]
-        public ActionResult DeleteCart()
+        public ActionResult DeleteCart(string id)
         {
-            return View(product);
-        }
+            List<product> productList = (List<product>)Session["cart"];
 
-        [HttpPost]
-        public ActionResult DeleteCart()
-        {
-            return View();
+            int count = 0;
+            foreach (var item in productList)
+            {
+                if (item.productID.Equals(id))
+                {
+                    break;
+                }
+                count++;
+            }
+            productList.RemoveAt(count);
+
+            return RedirectToAction("Cart");
         }
     }
 }

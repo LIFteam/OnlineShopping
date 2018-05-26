@@ -11,7 +11,8 @@ namespace OnlineShopping.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class shopOwner
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,12 +20,16 @@ namespace OnlineShopping.Models
         {
             this.products = new HashSet<product>();
         }
-    
+
         public string userID { get; set; }
         public string shopID { get; set; }
+        [Required(ErrorMessage = "Required"), MaxLength(25, ErrorMessage = "Max length is 25")]
         public string shopName { get; set; }
+        [Required(ErrorMessage = "Required")]
         public string shopAddress { get; set; }
+        [Required(ErrorMessage = "Required"), MaxLength(30, ErrorMessage = "Max length is 30")]
         public string shopEmail { get; set; }
+        [Required(ErrorMessage = "Required"), MaxLength(15, ErrorMessage = "Max length is 15")]
         public string shopContactNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
